@@ -649,13 +649,13 @@ class _ScanPayState extends State<ScanPay> {
         result = scanData;
       });
       if(result != null){
+
         await ScannqrCodeApi(result!.code.toString());
         controller.dispose();
       }
       else{
-        Fluttertoast.showToast(msg: 'Please Again Scan QR Code');
+        Fluttertoast.showToast(msg: 'QR Code Not Scan');
         Navigator.pop(context);
-
       }
 
     });
@@ -693,9 +693,15 @@ class _ScanPayState extends State<ScanPay> {
 
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
+
+
       var result = await response.stream.bytesToString();
+
+
       var finalresult1 = jsonDecode(result);
       if (finalresult1['error'] == false) {
+
+
         var finalresult = QrDataModel.fromJson(jsonDecode(result));
         setState(() {
           qrDataModel = finalresult;
@@ -709,8 +715,15 @@ class _ScanPayState extends State<ScanPay> {
               ));
 
       }
+      else{
+        Fluttertoast.showToast(msg: finalresult1['message']);
+Navigator.pop(context);
+      }
     } else {
       print(response.reasonPhrase);
     }
   }
+
+
+
 }

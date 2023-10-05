@@ -915,6 +915,7 @@ class _SignupScreenState extends State<SignupScreen> {
   File? adharbackImg;
   File? passbookImg;
   File? userImg;
+
   showAlertDialog(BuildContext context, String type) {
     AlertDialog alert = AlertDialog(
       actions: [

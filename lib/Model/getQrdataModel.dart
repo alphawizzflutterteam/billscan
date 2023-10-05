@@ -22,7 +22,7 @@ class QrDataModel {
   factory QrDataModel.fromJson(Map<String, dynamic> json) => QrDataModel(
     error: json["error"],
     message: json["message"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x)))??[],
   );
 
   Map<String, dynamic> toJson() => {
