@@ -42,6 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+
+
       onWillPop: () async {
         showDialog(
             context: context,
@@ -73,15 +75,18 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SafeArea(
           child: Scaffold(
         key: _scaffoldKey,
-        drawer: Drawer(
+        drawer:
+
+
+        Drawer(
           child: ListView(children: [
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => profile(),
-                    ));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => profile(),
+                //     ));
               },
               child: DrawerHeader(
                 decoration: const BoxDecoration(
@@ -126,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     // SizedBox(width: 50,),
                     Spacer(),
-                    Icon(Icons.edit,color: AppColors.SplashBackgroundColor,)
+                    // Icon(Icons.edit,color: AppColors.SplashBackgroundColor,)
                   ],
                 ),
               ),
@@ -272,6 +277,8 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ]),
         ),
+
+
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
           child: AppBar(
@@ -322,126 +329,130 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: Column(children: [
-          const SizedBox(
-            height: 40,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 55,
-                backgroundColor: AppColors.primery,
-                child: CircleAvatar(
-                  backgroundColor: AppColors.gray,
-                  backgroundImage:
-                      NetworkImage(getUserData?.data[0].staffImg ?? ''),
-                  radius: 54,
+        body: SingleChildScrollView(
+          child: Column(
+              
+              children: [
+            const SizedBox(
+              height: 40,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 55,
+                  backgroundColor: AppColors.primery,
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.gray,
+                    backgroundImage:
+                        NetworkImage(getUserData?.data[0].staffImg ?? ''),
+                    radius: 54,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Text(
+              '${getUserData?.data[0].username ?? ''}',
+              style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.blackTemp),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            Card(
+              elevation: 3,
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Image.asset(
+                  'assets/images/qr-code.png',
+                  height: MediaQuery.of(context).size.height / 3.5,
+                  width: MediaQuery.of(context).size.height / 3.5,
                 ),
               ),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Text(
-            '${getUserData?.data[0].username ?? ''}',
-            style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
-                color: AppColors.blackTemp),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          Card(
-            elevation: 3,
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Image.asset(
-                'assets/images/qr-code.png',
-                height: MediaQuery.of(context).size.height / 3.5,
-                width: MediaQuery.of(context).size.height / 3.5,
-              ),
             ),
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Lorem ipsum dolor sit amet, consectetur',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
-                    color: AppColors.gray),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
-                'adipiscing elit, sed do eiusmod',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
-                    color: AppColors.gray),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          InkWell(
-            onTap: () async {
-              //  Scannerr(context);
-
-              qrresult = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-
-                        //QRViewExample
-
-                      ScanPay(),
-                  ));
-
-              if (qrresult != null) {
-                print('scancode====================${qrresult}');
-                //await ScannqrCodeApi(qrresult);
-              }
-            },
-            child: Container(
-              width: MediaQuery.of(context).size.width / 1.4,
-              height: 50,
-              decoration: BoxDecoration(
-                  color: AppColors.primery,
-                  borderRadius: BorderRadius.circular(5)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    Icons.camera_alt_outlined,
-                    color: AppColors.SplashBackgroundColor,
-                  ),
-                  SizedBox(
-                    width: 3,
-                  ),
-                  Text(
-                    'Scan QR Code',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13,
-                        color: AppColors.SplashBackgroundColor),
-                  ),
-                ],
-              ),
+            const SizedBox(
+              height: 40,
             ),
-          )
-        ]),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Lorem ipsum dolor sit amet, consectetur',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                      color: AppColors.gray),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  'adipiscing elit, sed do eiusmod',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                      color: AppColors.gray),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            InkWell(
+              onTap: () async {
+                //  Scannerr(context);
+
+                qrresult = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+
+                          //QRViewExample
+
+                        ScanPay(),
+                    ));
+
+                if (qrresult != null) {
+                  print('scancode====================${qrresult}');
+                  //await ScannqrCodeApi(qrresult);
+                }
+              },
+              child: Container(
+                width: MediaQuery.of(context).size.width / 1.4,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: AppColors.primery,
+                    borderRadius: BorderRadius.circular(5)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.camera_alt_outlined,
+                      color: AppColors.SplashBackgroundColor,
+                    ),
+                    SizedBox(
+                      width: 3,
+                    ),
+                    Text(
+                      'Scan QR Code',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13,
+                          color: AppColors.SplashBackgroundColor),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ]),
+        ),
       )),
     );
   }

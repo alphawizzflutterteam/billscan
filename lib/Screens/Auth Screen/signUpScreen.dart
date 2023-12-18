@@ -83,7 +83,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
 
                           Container(
-                            height: MediaQuery.of(context).size.height/2.8,
+                            height: MediaQuery.of(context).size.height/3.2,
                             child: SingleChildScrollView(
                               child:
 
@@ -95,35 +95,35 @@ class _SignupScreenState extends State<SignupScreen> {
                                     hintt: 'Name',
                                     validation: 'Please Enter Your Name',
                                     icon: Icons.person),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                TextFormField(
-                                  maxLength: 50,
-                                  controller: emailController,
-                                  cursorColor: AppColors.gray,
-                                  style: const TextStyle(color: AppColors.gray),
-                                  decoration: const InputDecoration(
-                                    prefixIcon: Icon(
-                                      Icons.email,
-                                      color: AppColors.gray,
-                                    ),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.grey, width: 0.5)),
-                                    hintText: 'Email Id',
-                                    suffixStyle: TextStyle(color: AppColors.gray),
-                                    counterText: '',
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please Enter Email Id';
-                                    } else if (!value.contains("@") &&
-                                        !value.contains(".com")) {
-                                      return 'Please Enter Valid  Email Id';
-                                    }
-                                  },
-                                ),
+                                // const SizedBox(
+                                //   height: 10,
+                                // ),
+                                // TextFormField(
+                                //   maxLength: 50,
+                                //   controller: emailController,
+                                //   cursorColor: AppColors.gray,
+                                //   style: const TextStyle(color: AppColors.gray),
+                                //   decoration: const InputDecoration(
+                                //     prefixIcon: Icon(
+                                //       Icons.email,
+                                //       color: AppColors.gray,
+                                //     ),
+                                //     border: OutlineInputBorder(
+                                //         borderSide: BorderSide(
+                                //             color: Colors.grey, width: 0.5)),
+                                //     hintText: 'Email Id',
+                                //     suffixStyle: TextStyle(color: AppColors.gray),
+                                //     counterText: '',
+                                //   ),
+                                //   validator: (value) {
+                                //     if (value == null || value.isEmpty) {
+                                //       return 'Please Enter Email Id';
+                                //     } else if (!value.contains("@") &&
+                                //         !value.contains(".com")) {
+                                //       return 'Please Enter Valid  Email Id';
+                                //     }
+                                //   },
+                                // ),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -201,10 +201,21 @@ class _SignupScreenState extends State<SignupScreen> {
                                                   print(
                                                       technicianTypeController.text);
                                                 });
-                                              } else {
+                                              }
+                                              else if(_selectedLocation ==
+                                              'Plumber'){
                                                 setState(() {
                                                   technicianTypeController.text =
-                                                      'plumber';
+                                                  'plumber';
+                                                  print(
+                                                      technicianTypeController.text);
+                                                });
+                                              }
+
+                                              else {
+                                                setState(() {
+                                                  technicianTypeController.text =
+                                                      'both';
                                                   print(
                                                       technicianTypeController.text);
                                                 });
@@ -221,6 +232,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
 
                                       ),
+
+
                                     ],
                                   ),
                                 ),
@@ -327,7 +340,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                                       Spacer(),
                                       Container(
-                                        width: 200,
+                                        width: MediaQuery.of(context).size.width/2.2,
                                         height: 40,
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(5),
@@ -406,7 +419,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Container(
-                                            width: 200,
+                                            width: MediaQuery.of(context).size.width/2.2,
                                             height: 40,
                                             decoration: BoxDecoration(
                                                 borderRadius:
@@ -473,7 +486,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Container(
-                                            width: 200,
+                                            width: MediaQuery.of(context).size.width/2.2,
                                             height: 40,
                                             decoration: BoxDecoration(
                                                 borderRadius:
@@ -565,7 +578,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       ),
                                       Spacer(),
                                       Container(
-                                        width: 200,
+                                        width: MediaQuery.of(context).size.width/2.2,
                                         height: 40,
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(5),
@@ -642,7 +655,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       ),
                                       Spacer(),
                                       Container(
-                                        width: 200,
+                                        width: MediaQuery.of(context).size.width/2.2,
                                         height: 40,
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(5),
@@ -768,7 +781,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: const Text("Don't have an account? Log In",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                            fontSize: 15,
                             color: AppColors.SplashBackgroundColor,
                           ))),
                 ],
@@ -780,7 +793,7 @@ class _SignupScreenState extends State<SignupScreen> {
  bool selectt =false;
   final _formKey = GlobalKey<FormState>();
   String? _selectedLocation;
-  List<String> technician_typeList = ['Electrician','Plumber'];
+  List<String> technician_typeList = ['Electrician','Plumber','Both'];
 
 
   TextEditingController mobileController = TextEditingController();
@@ -797,8 +810,8 @@ class _SignupScreenState extends State<SignupScreen> {
   Future<void> staffRegistrationApi() async {
 
     print('api call');
+
     print(nameController.text);
-    print(emailController.text);
     print(mobileController.text);
     print(technicianTypeController.text);
     print(addressController.text);
@@ -817,7 +830,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
     request.fields.addAll({
       'name': nameController.text,
-      'email': emailController.text,
       'mobile': mobileController.text,
       'technician_type': technicianTypeController.text,
       'address': addressController.text,

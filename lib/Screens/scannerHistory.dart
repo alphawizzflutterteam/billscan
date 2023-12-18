@@ -65,12 +65,13 @@ class _ScannerHistoryState extends State<ScannerHistory> {
 
 
         ListView.builder(
+
           itemCount:  scannHistory!.data.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(left: 23, right: 23, bottom: 13),
               child: Container(
-                height: 130,
+                height:100,
                 width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
@@ -87,43 +88,44 @@ class _ScannerHistoryState extends State<ScannerHistory> {
                           children: [
 
 
-
-                            Row(
-                              children: [
-
-                                Text(
-                                  'Invoice Number : ${scannHistory!.data[index].invoiceNumber}',
-                                  style: TextStyle(
-                                      fontSize: 12, color: AppColors.blackTemp),
-                                ),
-
-                              ],
-                            ),
-                            Row(
-                              children:[
-                                Text(
-                                  'Created At : ${DateFormat('yyyy-MM-dd').format(scannHistory!.data[index].createdAt)}',
-                                  style: TextStyle(
-                                      fontSize: 12, color: AppColors.blackTemp),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children:[
-                                Text(
-                                  'Updated At : ${DateFormat('yyyy-MM-dd').format(scannHistory!.data[index].updatedAt)}',
-                                  style: TextStyle(
-                                      fontSize: 12, color: AppColors.blackTemp),
-                                ),
-                              ],
-                            ),
+                            //
+                            // Row(
+                            //   children: [
+                            //
+                            //
+                            //     Text(
+                            //       'Invoice Number : ${scannHistory!.data[index].invoiceNumber}',
+                            //       style: TextStyle(
+                            //           fontSize: 12, color: AppColors.blackTemp),
+                            //     ),
+                            //
+                            //   ],
+                            // ),
+                            // Row(
+                            //   children:[
+                            //     Text(
+                            //       'Created At : ${DateFormat('yyyy-MM-dd').format(scannHistory!.data[index].createdAt)}',
+                            //       style: TextStyle(
+                            //           fontSize: 12, color: AppColors.blackTemp),
+                            //     ),
+                            //   ],
+                            // ),
+                            // Row(
+                            //   children:[
+                            //     Text(
+                            //       'Updated At : ${DateFormat('yyyy-MM-dd').format(scannHistory!.data[index].updatedAt)}',
+                            //       style: TextStyle(
+                            //           fontSize: 12, color: AppColors.blackTemp),
+                            //     ),
+                            //   ],
+                            // ),
 
                             Row(
                               children:[
                                 Text(
                                   'Qr Id : ${scannHistory!.data[index].qrId}',
                                   style: TextStyle(
-                                      fontSize: 12, color: AppColors.blackTemp),
+                                      fontSize: 12, color: AppColors.blackTemp,fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -138,16 +140,31 @@ class _ScannerHistoryState extends State<ScannerHistory> {
                                 Text(
                                   'Qr generate Date : ${DateFormat('yyyy-MM-dd').format(scannHistory!.data[index].generatedDate)}',
                                   style: TextStyle(
-                                      fontSize: 12, color: AppColors.blackTemp),
+                                      fontSize: 12, color: AppColors.blackTemp,fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+
+                            Row(
+                              children:[
+                                // Text(
+                                //   'Qr generate Date : ${scannHistory!.data[index].generatedDate}',
+                                //   style: TextStyle(
+                                //       fontSize: 12, color: AppColors.blackTemp),
+                                // ),
+                                Text(
+                                  'Qr Scanned Date : ${DateFormat('yyyy-MM-dd').format(scannHistory!.data[index].createdAt)}',
+                                  style: TextStyle(
+                                      fontSize: 12, color: AppColors.blackTemp,fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                           ]),
 
-                      Container(height: 100,width: 100,
-
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),image: DecorationImage(image: NetworkImage('${scannHistory!.data[index].qr}'))),
-                      )
+                      // Container(height: 100,width: 100,
+                      //
+                      // decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),image: DecorationImage(image: NetworkImage('${scannHistory!.data[index].qr}'))),
+                      // )
                     ],
                   ),
                 ),

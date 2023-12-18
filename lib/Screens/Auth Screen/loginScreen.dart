@@ -175,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   "Don't have an account? Sign Up",
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12,
+                                    fontSize: 15,
                                     color: AppColors.SplashBackgroundColor,
                                   ))),
                         ],
