@@ -153,6 +153,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                 const SizedBox(
                                   height: 10,
                                 ),
+
+
                                 Container(
                                   height: 60,
                                   decoration: BoxDecoration(

@@ -673,6 +673,10 @@ class _ScanPayState extends State<ScanPay> {
 
   }
 
+
+
+
+
   @override
   void dispose() {
     controller?.dispose();
