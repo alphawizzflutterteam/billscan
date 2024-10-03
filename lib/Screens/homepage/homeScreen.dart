@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,12 +17,7 @@ import '../Auth Screen/loginScreen.dart';
 import '../about_us.dart';
 import '../privecy_policy.dart';
 import '../scannerHistory.dart';
-import 'dart:developer';
-import 'dart:io';
-import 'package:http/http.dart' as http;
-
 import '../terms_and_contition.dart';
-import '../user_Profile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -39,11 +35,31 @@ class _HomeScreenState extends State<HomeScreen> {
     getuserId();
   }
 
+  deleteAccount() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    useriddd = prefs.getString('userId');
+    var headers = {
+      'Cookie': 'ci_session=61db022e494227a9b26394155823533f37cd319f'
+    };
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('https://amitretail.in/app/v1/api/delete_account'));
+    request.fields.addAll({'user_id': useriddd.toString()});
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      Fluttertoast.showToast(msg: "Delete Account Successfully");
+      sessonRemove();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-
-
       onWillPop: () async {
         showDialog(
             context: context,
@@ -75,10 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SafeArea(
           child: Scaffold(
         key: _scaffoldKey,
-        drawer:
-
-
-        Drawer(
+        drawer: Drawer(
           child: ListView(children: [
             InkWell(
               onTap: () {
@@ -187,6 +200,35 @@ class _HomeScreenState extends State<HomeScreen> {
                           barrierDismissible: false,
                           builder: (BuildContext context) {
                             return AlertDialog(
+                              title: Text("Delete Account"),
+                              content: Text(
+                                  "Are you sure you wan't to dlete this account"),
+                              actions: <Widget>[
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: AppColors.primery),
+                                  child: Text("YES"),
+                                  onPressed: () async {
+                                    deleteAccount();
+                                  },
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: AppColors.primery),
+                                  child: Text("NO"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                )
+                              ],
+                            );
+                          });
+                    } else if (currentIndex == 6) {
+                      showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
                               title: Text("Confirm Sign Out"),
                               content: Text("Are you sure to sign out?"),
                               actions: <Widget>[
@@ -277,8 +319,6 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ]),
         ),
-
-
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
           child: AppBar(
@@ -316,7 +356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 3.9,
                       ),
-                      Text(
+                      const Text(
                         'Scan item',
                         style: TextStyle(
                             fontSize: 17,
@@ -330,9 +370,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body: SingleChildScrollView(
-          child: Column(
-              
-              children: [
+          child: Column(children: [
             const SizedBox(
               height: 40,
             ),
@@ -355,8 +393,8 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 5,
             ),
             Text(
-              '${getUserData?.data[0].username ?? ''}',
-              style: TextStyle(
+              getUserData?.data[0].username ?? '',
+              style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
                   color: AppColors.blackTemp),
@@ -380,8 +418,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
+              children: const [
+                Text(
                   'Lorem ipsum dolor sit amet, consectetur',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -416,7 +454,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           //QRViewExample
 
-                        ScanPay(),
+                          ScanPay(),
                     ));
 
                 if (qrresult != null) {
@@ -493,6 +531,11 @@ class _HomeScreenState extends State<HomeScreen> {
       'titlee': 'Privacy Policy',
       'image': 'assets/images/Privacy Policy.png',
       'image1': 'assets/images/Privacy PolicyW.png',
+    },
+    {
+      'titlee': 'Delete Account',
+      'image': 'assets/images/delete.png',
+      'image1': 'assets/images/delete.png',
     },
     {
       'titlee': 'Logout',
@@ -597,26 +640,24 @@ class ScanPay extends StatefulWidget {
 class _ScanPayState extends State<ScanPay> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
-  QRViewController? controller ;
+  QRViewController? controller;
 
   @override
   void initState() {
     super.initState();
     getuserId();
     _onQRViewCreated;
-
-
   }
-
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: AppColors.primery,
       body: Column(
         children: <Widget>[
-          SizedBox(height: 200,),
+          SizedBox(
+            height: 200,
+          ),
           Container(
             padding: EdgeInsets.all(10),
             width: 326,
@@ -624,65 +665,51 @@ class _ScanPayState extends State<ScanPay> {
             decoration: BoxDecoration(
                 color: AppColors.primery,
                 border: Border.all(color: AppColors.primery),
-                borderRadius: BorderRadius.circular(10)
-            ),
+                borderRadius: BorderRadius.circular(10)),
             child: QRView(
               key: qrKey,
               onQRViewCreated: _onQRViewCreated,
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Center(
             child: InkWell(
-              onTap: () {
-
-              },
+              onTap: () {},
               child: Container(
-
                 height: 45,
-                width: MediaQuery.of(context).size.width-150,
-
+                width: MediaQuery.of(context).size.width - 150,
               ),
             ),
           ),
-
         ],
       ),
     );
   }
 
-  _onQRViewCreated( QRViewController controller) {
-
+  _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.resumeCamera();
     controller.scannedDataStream.listen((scanData) async {
       setState(() {
         result = scanData;
       });
-      if(result != null){
-
+      if (result != null) {
         await ScannqrCodeApi(result!.code.toString());
         controller.dispose();
-      }
-      else{
+      } else {
         Fluttertoast.showToast(msg: 'QR Code Not Scan');
         Navigator.pop(context);
       }
-
     });
-
   }
-
-
-
-
 
   @override
   void dispose() {
     controller?.dispose();
     super.dispose();
   }
-
 
   var useriddd;
 
@@ -708,37 +735,27 @@ class _ScanPayState extends State<ScanPay> {
 
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {
-
-
       var result = await response.stream.bytesToString();
-
 
       var finalresult1 = jsonDecode(result);
       if (finalresult1['error'] == false) {
-
-
         var finalresult = QrDataModel.fromJson(jsonDecode(result));
         setState(() {
           qrDataModel = finalresult;
           Fluttertoast.showToast(msg: 'QR Successfully Scanned');
         });
 
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ScannerHistory(),
-              ));
-
-      }
-      else{
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ScannerHistory(),
+            ));
+      } else {
         Fluttertoast.showToast(msg: finalresult1['message']);
-Navigator.pop(context);
+        Navigator.pop(context);
       }
     } else {
       print(response.reasonPhrase);
     }
   }
-
-
-
 }

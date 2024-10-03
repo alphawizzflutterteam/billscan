@@ -24,7 +24,6 @@ class _SplashState extends State<Splash> {
       const Duration(seconds: 3),
       () {
         sessonManager();
-
       },
     );
   }
@@ -37,35 +36,43 @@ class _SplashState extends State<Splash> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Image.asset(
-                      'assets/images/shap1.png',
-                      height: 170,
-                      width: 170,
-                    ),
-                  ],
-                ),
-                Image.asset(
-                  'assets/images/logo.png',
-                  height: 150,
-                  width: 150,
-                ),
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/images/shap.png',
-                      height: 170,
-                      width: 170,
-                    ),
-                  ],
-                ),
-              ],
+            child: Image.asset(
+              'assets/images/logo.png',
+              height: 180,
+              width: 180,
             ),
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     const SizedBox(
+            //       height: 100,
+            //     ),
+            //     // Row(
+            //     //   mainAxisAlignment: MainAxisAlignment.end,
+            //     //   children: [
+            //     //     Image.asset(
+            //     //       'assets/images/shap1.png',
+            //     //       height: 170,
+            //     //       width: 170,
+            //     //     ),
+            //     //   ],
+            //     // ),
+            //     Image.asset(
+            //       'assets/images/logo.png',
+            //       height: 150,
+            //       width: 150,
+            //     ),
+            //     // Row(
+            //     //   children: [
+            //     //     Image.asset(
+            //     //       'assets/images/shap.png',
+            //     //       height: 170,
+            //     //       width: 170,
+            //     //     ),
+            //     //   ],
+            //     // ),
+            //   ],
+            // ),
           ),
         ),
       ),
@@ -74,25 +81,22 @@ class _SplashState extends State<Splash> {
 
   Future<void> sessonManager() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-var sesson = prefs.getString('userId');
-print('-=========================${sesson.runtimeType}');
-print('-=========================${sesson}');
+    var sesson = prefs.getString('userId');
+    print('-=========================${sesson.runtimeType}');
+    print('-=========================${sesson}');
 
-
-if(sesson!=null)
-  {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>HomeScreen() ,));
-
+    if (sesson != null) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          ));
+    } else {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
+          ));
+    }
   }
-else
-  {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>LoginScreen() ,));
-
-
-  }
-
-
-  }
-
-
 }

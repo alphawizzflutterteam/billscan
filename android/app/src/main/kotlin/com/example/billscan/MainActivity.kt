@@ -1,4 +1,4 @@
-package com.example.billscan
+package com.billscanner.main
 
 import io.flutter.embedding.android.FlutterActivity
 

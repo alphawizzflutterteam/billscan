@@ -18,11 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: '${ConstScreen.appName}',
-      theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.SplashBackgroundColor
-      ),
-      home:Splash(),
+      title: ConstScreen.appName,
+      theme:
+          ThemeData(scaffoldBackgroundColor: AppColors.SplashBackgroundColor),
+      home: Splash(),
     );
   }
 }

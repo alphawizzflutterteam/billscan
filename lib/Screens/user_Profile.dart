@@ -1,20 +1,15 @@
-import 'dart:convert';
+import 'dart:io';
 
-import 'package:billscan/Helper/constant.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Api Services/allApiEndPoint.dart';
 import '../../Custom Widget/costomTextfield.dart';
 import '../../Helper/app_colors.dart';
-import 'package:intl/intl.dart';
-
-import 'dart:io';
-import 'package:http/http.dart' as http;
-
 import '../Custom Widget/customAppbar.dart';
 import '../Model/getUserDataModel.dart';
 
@@ -26,7 +21,6 @@ class profile extends StatefulWidget {
 }
 
 class _profileState extends State<profile> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -34,23 +28,19 @@ class _profileState extends State<profile> {
 
     getuserId();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(80),
-              child: CustomAppbar(titlee: 'Your Profile')),
-
+            appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(80),
+                child: CustomAppbar(titlee: 'Your Profile')),
             body: SingleChildScrollView(
-              child:
-              Padding(
+              child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
-
-
-
                     CustomTextField(
                         controller: nameController,
                         maxleanthh: 60,
@@ -71,8 +61,8 @@ class _profileState extends State<profile> {
                           color: AppColors.gray,
                         ),
                         border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.grey, width: 0.5)),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 0.5)),
                         hintText: 'Email Id',
                         suffixStyle: TextStyle(color: AppColors.gray),
                         counterText: '',
@@ -135,23 +125,18 @@ class _profileState extends State<profile> {
                           SizedBox(
                             width: 10,
                           ),
-                        SizedBox(
-                          width:
-                              MediaQuery.of(context).size.width /
-                                  2.6,
-                          child: Text(
-                            technicianType,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style:
-                            TextStyle(color: AppColors.gray,fontSize: 16),
-                          ),
-                        ), // Not necessary for Option 1
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 2.6,
+                            child: Text(
+                              technicianType,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: TextStyle(
+                                  color: AppColors.gray, fontSize: 16),
+                            ),
+                          ), // Not necessary for Option 1
                           DropdownButtonHideUnderline(
-                            child:
-
-                            DropdownButton2(
-
+                            child: DropdownButton2(
                               //isExpanded: true,
 
                               // hint: SizedBox(
@@ -170,21 +155,17 @@ class _profileState extends State<profile> {
                               onChanged: (newValue) {
                                 setState(() {
                                   _selectedLocation = newValue.toString();
-                                  technicianType=_selectedLocation.toString();
-                                  if (_selectedLocation ==
-                                      'Electrician') {
+                                  technicianType = _selectedLocation.toString();
+                                  if (_selectedLocation == 'Electrician') {
                                     setState(() {
                                       technicianTypeController.text =
-                                      'electrician';
-                                      print(
-                                          technicianTypeController.text);
+                                          'electrician';
+                                      print(technicianTypeController.text);
                                     });
                                   } else {
                                     setState(() {
-                                      technicianTypeController.text =
-                                      'plumber';
-                                      print(
-                                          technicianTypeController.text);
+                                      technicianTypeController.text = 'plumber';
+                                      print(technicianTypeController.text);
                                     });
                                   }
                                 });
@@ -196,8 +177,6 @@ class _profileState extends State<profile> {
                                 );
                               }).toList(),
                             ),
-
-
                           ),
                         ],
                       ),
@@ -206,7 +185,6 @@ class _profileState extends State<profile> {
                       height: 10,
                     ),
                     CustomTextField(
-
                         controller: addressController,
                         maxleanthh: 100,
                         hintt: 'Address',
@@ -218,7 +196,6 @@ class _profileState extends State<profile> {
                     TextFormField(
                       readOnly: true,
                       onTap: () {
-
                         _selectDate(context);
                       },
                       keyboardType: TextInputType.number,
@@ -281,34 +258,23 @@ class _profileState extends State<profile> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               border: Border.all(
-                                  width: 1,
-                                  color: AppColors.textfieldColor),
+                                  width: 1, color: AppColors.textfieldColor),
                             ),
                             child: Center(
                               child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: getUserData?.data == null
-                                    ? Image.asset(
-                                  'assets/images/pan.png',
-                                  height: 150.0,
-                                  width: 100.0,
-                                )
-                                    :
-panImg==null?
-                                Image.network(
-                                    '${getUserData?.data.first.pancardImg.toString()}'
-                                   ):
-
-Image.file(
-    panImg!)
-
-
-
-                              ),
-
+                                  padding: const EdgeInsets.all(10),
+                                  child: getUserData?.data == null
+                                      ? Image.asset(
+                                          'assets/images/pan.png',
+                                          height: 150.0,
+                                          width: 100.0,
+                                        )
+                                      : panImg == null
+                                          ? Image.network(
+                                              '${getUserData?.data.first.pancardImg.toString()}')
+                                          : Image.file(panImg!)),
                             ),
                           ),
-
                           Spacer(),
                           Container(
                             width: 200,
@@ -318,11 +284,11 @@ Image.file(
                                 color: AppColors.primery),
                             child: Center(
                                 child: Text(
-                                  'Upload Pan Card',
-                                  style: TextStyle(
-                                      color: AppColors.SplashBackgroundColor,
-                                      fontWeight: FontWeight.w500),
-                                )),
+                              'Upload Pan Card',
+                              style: TextStyle(
+                                  color: AppColors.SplashBackgroundColor,
+                                  fontWeight: FontWeight.w500),
+                            )),
                           )
                         ],
                       ),
@@ -368,28 +334,21 @@ Image.file(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               border: Border.all(
-                                  width: 1,
-                                  color: AppColors.textfieldColor),
+                                  width: 1, color: AppColors.textfieldColor),
                             ),
                             child: Center(
                               child: Padding(
                                   padding: const EdgeInsets.all(10),
-                                  child:
-
-                                  getUserData?.data==null?
-                                  Image.asset(
-                                    'assets/images/adhar.png',
-                                    height: 150.0,
-                                    width: 100.0,
-                                  ):
-                                      adharfronImg==null?
-
-                                  Image.network(
-                                      '${getUserData?.data.first.adharFrontImg.toString()}'
-                                  ):
-                                      Image.file(
-                                          adharbackImg!)
-                              ),
+                                  child: getUserData?.data == null
+                                      ? Image.asset(
+                                          'assets/images/adhar.png',
+                                          height: 150.0,
+                                          width: 100.0,
+                                        )
+                                      : adharfronImg == null
+                                          ? Image.network(
+                                              '${getUserData?.data.first.adharFrontImg.toString()}')
+                                          : Image.file(adharbackImg!)),
                             ),
                           ),
                           Spacer(),
@@ -400,15 +359,13 @@ Image.file(
                                 width: 200,
                                 height: 40,
                                 decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(5),
+                                    borderRadius: BorderRadius.circular(5),
                                     color: AppColors.primery),
                                 child: Center(
                                   child: Text(
                                     'Upload Aadhar Card',
                                     style: TextStyle(
-                                        color: AppColors
-                                            .SplashBackgroundColor,
+                                        color: AppColors.SplashBackgroundColor,
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
@@ -418,8 +375,7 @@ Image.file(
                                   Text(
                                     '  Front Image',
                                     style: TextStyle(
-                                        color: AppColors.gray,
-                                        fontSize: 10),
+                                        color: AppColors.gray, fontSize: 10),
                                   ),
                                 ],
                               ),
@@ -443,26 +399,21 @@ Image.file(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               border: Border.all(
-                                  width: 1,
-                                  color: AppColors.textfieldColor),
+                                  width: 1, color: AppColors.textfieldColor),
                             ),
                             child: Center(
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
-                                child:
-                                getUserData?.data==null?
-                                Image.asset(
-                                  'assets/images/backadhar.png',
-                                  height: 150.0,
-                                  width: 100.0,
-                                ):
-
-                                    adharbackImg==null?
-                                Image.network(
-                                    '${getUserData?.data.first.adharBackImg.toString()}'
-                                ):
-                                    Image.file(
-                                        adharbackImg!),
+                                child: getUserData?.data == null
+                                    ? Image.asset(
+                                        'assets/images/backadhar.png',
+                                        height: 150.0,
+                                        width: 100.0,
+                                      )
+                                    : adharbackImg == null
+                                        ? Image.network(
+                                            '${getUserData?.data.first.adharBackImg.toString()}')
+                                        : Image.file(adharbackImg!),
                               ),
                             ),
                           ),
@@ -474,15 +425,13 @@ Image.file(
                                 width: 200,
                                 height: 40,
                                 decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(5),
+                                    borderRadius: BorderRadius.circular(5),
                                     color: AppColors.primery),
                                 child: Center(
                                   child: Text(
                                     'Upload Aadhar Card',
                                     style: TextStyle(
-                                        color: AppColors
-                                            .SplashBackgroundColor,
+                                        color: AppColors.SplashBackgroundColor,
                                         fontWeight: FontWeight.w500),
                                   ),
                                 ),
@@ -492,8 +441,7 @@ Image.file(
                                   Text(
                                     '  Back Image',
                                     style: TextStyle(
-                                        color: AppColors.gray,
-                                        fontSize: 10),
+                                        color: AppColors.gray, fontSize: 10),
                                   ),
                                 ],
                               ),
@@ -523,9 +471,7 @@ Image.file(
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please Enter Account Number';
-                        }
-
-                        else if (value.length <5) {
+                        } else if (value.length < 5) {
                           return 'Please Enter Valid Account Number';
                         }
                       },
@@ -545,28 +491,21 @@ Image.file(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               border: Border.all(
-                                  width: 1,
-                                  color: AppColors.textfieldColor),
+                                  width: 1, color: AppColors.textfieldColor),
                             ),
                             child: Center(
                               child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child:
-                                getUserData?.data==null?
-                                Image.asset(
-                                  'assets/images/passbook.png',
-                                  height: 150.0,
-                                  width: 100.0,
-                                ):
-                                    passbookImg==null?
-
-                                Image.network(
-                                    '${getUserData?.data.first.bankPassbook.toString()}'
-                                ):
-
-                                    Image.file(
-                                        passbookImg!)
-                              ),
+                                  padding: const EdgeInsets.all(10),
+                                  child: getUserData?.data == null
+                                      ? Image.asset(
+                                          'assets/images/passbook.png',
+                                          height: 150.0,
+                                          width: 100.0,
+                                        )
+                                      : passbookImg == null
+                                          ? Image.network(
+                                              '${getUserData?.data.first.bankPassbook.toString()}')
+                                          : Image.file(passbookImg!)),
                             ),
                           ),
                           Spacer(),
@@ -578,11 +517,11 @@ Image.file(
                                 color: AppColors.primery),
                             child: Center(
                                 child: Text(
-                                  'Upload Passbook/Cheque',
-                                  style: TextStyle(
-                                      color: AppColors.SplashBackgroundColor,
-                                      fontWeight: FontWeight.w500),
-                                )),
+                              'Upload Passbook/Cheque',
+                              style: TextStyle(
+                                  color: AppColors.SplashBackgroundColor,
+                                  fontWeight: FontWeight.w500),
+                            )),
                           )
                         ],
                       ),
@@ -628,27 +567,21 @@ Image.file(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               border: Border.all(
-                                  width: 1,
-                                  color: AppColors.textfieldColor),
+                                  width: 1, color: AppColors.textfieldColor),
                             ),
                             child: Center(
                               child: Padding(
                                   padding: const EdgeInsets.all(10),
-                                  child:
-                                  getUserData?.data==null?
-                                  Image.asset(
-                                    'assets/images/Group 72514.png',
-                                    height: 150.0,
-                                    width: 150.0,
-                                  ):
-                                      userImg==null?
-
-                                  Image.network(
-                                      '${getUserData?.data.first.staffImg.toString()}'
-                                  ):
-                                      Image.file(
-                                          userImg!)
-                              ),
+                                  child: getUserData?.data == null
+                                      ? Image.asset(
+                                          'assets/images/Group 72514.png',
+                                          height: 150.0,
+                                          width: 150.0,
+                                        )
+                                      : userImg == null
+                                          ? Image.network(
+                                              '${getUserData?.data.first.staffImg.toString()}')
+                                          : Image.file(userImg!)),
                             ),
                           ),
                           Spacer(),
@@ -660,16 +593,15 @@ Image.file(
                                 color: AppColors.primery),
                             child: Center(
                                 child: Text(
-                                  'Upload Your Image',
-                                  style: TextStyle(
-                                      color: AppColors.SplashBackgroundColor,
-                                      fontWeight: FontWeight.w500),
-                                )),
+                              'Upload Your Image',
+                              style: TextStyle(
+                                  color: AppColors.SplashBackgroundColor,
+                                  fontWeight: FontWeight.w500),
+                            )),
                           )
                         ],
                       ),
                     ),
-
 
                     const SizedBox(
                       height: 30,
@@ -723,28 +655,23 @@ Image.file(
                     //   ),
                     //
                     // ),
-
                   ],
                 ),
               ),
-
-
             )));
   }
-  bool selectt =false;
+
+  bool selectt = false;
   final _formKey = GlobalKey<FormState>();
-  String ? _selectedLocation;
-  List<String> technician_typeList = ['Electrician','Plumber'];
-
-
-
+  String? _selectedLocation;
+  List<String> technician_typeList = ['Electrician', 'Plumber'];
 
   Future<void> pickImage(ImageSource source, String type) async {
     final pickedFile = await ImagePicker().pickImage(
       source: source,
-        maxHeight: 100,
-        maxWidth: 100,
-        imageQuality: 50,  // You can adjust the image quality here
+      maxHeight: 100,
+      maxWidth: 100,
+      imageQuality: 50, // You can adjust the image quality here
     );
 
     if (pickedFile != null) {
@@ -755,19 +682,15 @@ Image.file(
         } else if (type == 'aadharfront') {
           adharfronImg = File(pickedFile.path);
           print(adharfronImg);
-
         } else if (type == 'aadharback') {
           adharbackImg = File(pickedFile.path);
           print(adharbackImg);
-
         } else if (type == 'account') {
           passbookImg = File(pickedFile.path);
           print(passbookImg);
-
         } else if (type == 'profile') {
           userImg = File(pickedFile.path);
           print('============${userImg!.path}');
-
         }
       });
     }
@@ -843,7 +766,6 @@ Image.file(
                         print(type);
                         Navigator.of(context).pop();
                         pickImage(ImageSource.camera, type);
-
                       },
                       child: Card(
                         elevation: 5,
@@ -872,11 +794,9 @@ Image.file(
     );
   }
 
-
   DateTime selectedDate = DateTime.now();
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
-
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(1950),
@@ -885,13 +805,11 @@ Image.file(
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
-        dateofController.text=
-
-
-            DateFormat('yyyy-MM-dd').format(selectedDate);
+        dateofController.text = DateFormat('yyyy-MM-dd').format(selectedDate);
         print("==================${dateofController.text}");
       });
   }
+
   TextEditingController mobileController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -915,7 +833,7 @@ Image.file(
   }
 
   GetUserData? getUserData;
-var technicianType='';
+  var technicianType = '';
   void getUserDtaApi(String userId) {
     print('get user data api');
     var data = {'user_id': userId.toString()};
@@ -923,9 +841,8 @@ var technicianType='';
     apiBaseHelper
         .postAPICall(Uri.parse(ApiService.getUserDataApiUrl), data)
         .then(
-          (getdata) async {
-        print('${getdata}');
-
+      (getdata) async {
+        print('$getdata');
         bool error = getdata["error"];
         String? msge = getdata["message"];
         print('${error}');
@@ -933,33 +850,26 @@ var technicianType='';
           var finalresult = GetUserData.fromJson(getdata);
           setState(() {
             getUserData = finalresult;
-            nameController.text=getUserData!.data.first.username;
-            mobileController.text=getUserData!.data.first.mobile;
-            emailController.text=getUserData!.data.first.email;
-            dateofController.text='${DateFormat('yyyy-MM-dd').format(getUserData!.data.first.dob)}';
-            if(getUserData!.data.first.technicianType=='electrician')
-              {
-                setState(() {
-                  technicianTypeController.text='Electrician';
-                });
-              }
-            else{
+            nameController.text = getUserData!.data.first.username;
+            mobileController.text = getUserData!.data.first.mobile;
+            emailController.text = getUserData!.data.first.email ?? "";
+            dateofController.text =
+                DateFormat('yyyy-MM-dd').format(getUserData!.data.first.dob);
+            if (getUserData!.data.first.technicianType == 'electrician') {
               setState(() {
-                technicianTypeController.text='Plumber';
+                technicianTypeController.text = 'Electrician';
               });
-
-
+            } else {
+              setState(() {
+                technicianTypeController.text = 'Plumber';
+              });
             }
-
-
-            technicianType=technicianTypeController.text.toString();
-
-            addressController.text=getUserData!.data.first.address;
-            pannumberController.text=getUserData!.data.first.pancardNumber;
-            adharController.text=getUserData!.data.first.adharNumber;
-            accountController.text=getUserData!.data.first.accountNumber;
-            ifscController.text=getUserData!.data.first.ifscCode;
-
+            technicianType = technicianTypeController.text.toString();
+            addressController.text = getUserData!.data.first.address;
+            pannumberController.text = getUserData!.data.first.pancardNumber;
+            adharController.text = getUserData!.data.first.adharNumber;
+            accountController.text = getUserData!.data.first.accountNumber;
+            ifscController.text = getUserData!.data.first.ifscCode;
           });
         } else {
           Fluttertoast.showToast(
