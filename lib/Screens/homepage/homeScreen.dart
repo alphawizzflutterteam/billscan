@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -370,126 +369,125 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body: SingleChildScrollView(
-          child: Column(children: [
-            const SizedBox(
-              height: 40,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 55,
-                  backgroundColor: AppColors.primery,
-                  child: CircleAvatar(
-                    backgroundColor: AppColors.gray,
-                    backgroundImage:
-                        NetworkImage(getUserData?.data[0].staffImg ?? ''),
-                    radius: 54,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 40,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 55,
+                    backgroundColor: AppColors.primery,
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.gray,
+                      backgroundImage:
+                          NetworkImage(getUserData?.data[0].staffImg ?? ''),
+                      radius: 54,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                getUserData?.data[0].username ?? '',
+                style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.blackTemp),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Card(
+                elevation: 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Image.asset(
+                    'assets/images/qr-code.png',
+                    height: MediaQuery.of(context).size.height / 3.5,
+                    width: MediaQuery.of(context).size.height / 3.5,
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Text(
-              getUserData?.data[0].username ?? '',
-              style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.blackTemp),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Card(
-              elevation: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Image.asset(
-                  'assets/images/qr-code.png',
-                  height: MediaQuery.of(context).size.height / 3.5,
-                  width: MediaQuery.of(context).size.height / 3.5,
-                ),
               ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'Lorem ipsum dolor sit amet, consectetur',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                      color: AppColors.gray),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'adipiscing elit, sed do eiusmod',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                      color: AppColors.gray),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            InkWell(
-              onTap: () async {
-                //  Scannerr(context);
-
-                qrresult = await Navigator.push(
+              const SizedBox(
+                height: 40,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    'Lorem ipsum dolor sit amet, consectetur',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        color: AppColors.gray),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    'adipiscing elit, sed do eiusmod',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        color: AppColors.gray),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              InkWell(
+                onTap: () async {
+                  //  Scannerr(context);
+                  qrresult = await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-
                           //QRViewExample
-
                           ScanPay(),
-                    ));
-
-                if (qrresult != null) {
-                  print('scancode====================${qrresult}');
-                  //await ScannqrCodeApi(qrresult);
-                }
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width / 1.4,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: AppColors.primery,
-                    borderRadius: BorderRadius.circular(5)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.camera_alt_outlined,
-                      color: AppColors.SplashBackgroundColor,
                     ),
-                    SizedBox(
-                      width: 3,
-                    ),
-                    Text(
-                      'Scan QR Code',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13,
-                          color: AppColors.SplashBackgroundColor),
-                    ),
-                  ],
+                  );
+                  if (qrresult != null) {
+                    print('scancode====================$qrresult');
+                    //await ScannqrCodeApi(qrresult);
+                  }
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 1.4,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: AppColors.primery,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.camera_alt_outlined,
+                        color: AppColors.SplashBackgroundColor,
+                      ),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Text(
+                        'Scan QR Code',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: AppColors.SplashBackgroundColor),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            )
-          ]),
+            ],
+          ),
         ),
       )),
     );
@@ -655,11 +653,11 @@ class _ScanPayState extends State<ScanPay> {
       backgroundColor: AppColors.primery,
       body: Column(
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 200,
           ),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             width: 326,
             height: 326,
             decoration: BoxDecoration(
@@ -669,15 +667,22 @@ class _ScanPayState extends State<ScanPay> {
             child: QRView(
               key: qrKey,
               onQRViewCreated: _onQRViewCreated,
+              overlay: QrScannerOverlayShape(
+                borderColor: Colors.red,
+                borderRadius: 10,
+                borderLength: 30,
+                borderWidth: 10,
+                cutOutSize: 250,
+              ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Center(
             child: InkWell(
               onTap: () {},
-              child: Container(
+              child: SizedBox(
                 height: 45,
                 width: MediaQuery.of(context).size.width - 150,
               ),
@@ -688,18 +693,23 @@ class _ScanPayState extends State<ScanPay> {
     );
   }
 
-  _onQRViewCreated(QRViewController controller) {
+  bool isProcessing = false;
+  void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.resumeCamera();
     controller.scannedDataStream.listen((scanData) async {
+      if (isProcessing) return;
+
       setState(() {
         result = scanData;
+        isProcessing = true;
       });
-      if (result != null) {
-        await ScannqrCodeApi(result!.code.toString());
-        controller.dispose();
+
+      if (result != null && result!.code != null) {
+        print("Scanned QR code: ${result!.code}");
+        await ScannqrCodeApi(result!.code!);
       } else {
-        Fluttertoast.showToast(msg: 'QR Code Not Scan');
+        Fluttertoast.showToast(msg: 'QR Code not scanned');
         Navigator.pop(context);
       }
     });
@@ -718,44 +728,92 @@ class _ScanPayState extends State<ScanPay> {
     useriddd = prefs.getString('userId');
     print(
         'use id in scan screen-=========================${useriddd.runtimeType}');
-    print('user id in scan screen-=========================${useriddd}');
+    print('user id in scan screen-=========================$useriddd');
   }
 
   QrDataModel? qrDataModel;
+  // Future<void> ScannqrCodeApi(String scanid) async {
+  //   var headers = {
+  //     'Cookie': 'ci_session=f86367d664b412351a587dfc1b283720d4fa9666'
+  //   };
+  //   var request = http.MultipartRequest(
+  //       'POST', Uri.parse('${ConstScreen.baseUrl}get_qr/$scanid'));
+  //   request.fields.addAll({'user_id': useriddd.toString()});
+  //   print('${request.fields}');
+  //   print('${request.url}');
+  //   request.headers.addAll(headers);
+  //
+  //   http.StreamedResponse response = await request.send();
+  //   if (response.statusCode == 200) {
+  //     var result = await response.stream.bytesToString();
+  //
+  //     var finalresult1 = jsonDecode(result);
+  //     if (finalresult1['error'] == false) {
+  //       var finalresult = QrDataModel.fromJson(jsonDecode(result));
+  //       setState(() {
+  //         qrDataModel = finalresult;
+  //         Fluttertoast.showToast(msg: 'QR Successfully Scanned');
+  //       });
+  //
+  //       Navigator.pushReplacement(
+  //           context,
+  //           MaterialPageRoute(
+  //             builder: (context) => ScannerHistory(),
+  //           ));
+  //     } else {
+  //       Fluttertoast.showToast(msg: finalresult1['message']);
+  //       Navigator.pop(context);
+  //     }
+  //   } else {
+  //     print(response.reasonPhrase);
+  //   }
+  // }
+
   Future<void> ScannqrCodeApi(String scanid) async {
-    var headers = {
-      'Cookie': 'ci_session=f86367d664b412351a587dfc1b283720d4fa9666'
-    };
-    var request = http.MultipartRequest(
-        'POST', Uri.parse('${ConstScreen.baseUrl}get_qr/${scanid}'));
-    request.fields.addAll({'user_id': useriddd.toString()});
-    print('${request.fields}');
-    print('${request.url}');
-    request.headers.addAll(headers);
+    try {
+      var headers = {
+        'Cookie': 'ci_session=f86367d664b412351a587dfc1b283720d4fa9666'
+      };
 
-    http.StreamedResponse response = await request.send();
-    if (response.statusCode == 200) {
-      var result = await response.stream.bytesToString();
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse('${ConstScreen.baseUrl}get_qr/$scanid'),
+      );
+      request.fields['user_id'] = useriddd;
+      request.headers.addAll(headers);
 
-      var finalresult1 = jsonDecode(result);
-      if (finalresult1['error'] == false) {
-        var finalresult = QrDataModel.fromJson(jsonDecode(result));
-        setState(() {
-          qrDataModel = finalresult;
+      print('Request fields: ${request.fields}');
+      print('Request URL: ${request.url}');
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        var result = await response.stream.bytesToString();
+        var decoded = jsonDecode(result);
+
+        if (decoded['error'] == false) {
+          qrDataModel = QrDataModel.fromJson(decoded);
+
           Fluttertoast.showToast(msg: 'QR Successfully Scanned');
-        });
-
-        Navigator.pushReplacement(
+          Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
-              builder: (context) => ScannerHistory(),
-            ));
+            MaterialPageRoute(builder: (context) => const ScannerHistory()),
+          );
+        } else {
+          Fluttertoast.showToast(msg: decoded['message']);
+          Navigator.pop(context);
+        }
       } else {
-        Fluttertoast.showToast(msg: finalresult1['message']);
+        print('Failed: ${response.reasonPhrase}');
+        Fluttertoast.showToast(msg: 'Server error');
         Navigator.pop(context);
       }
-    } else {
-      print(response.reasonPhrase);
+    } catch (e) {
+      print('Exception: $e');
+      Fluttertoast.showToast(msg: 'Something went wrong');
+      Navigator.pop(context);
+    } finally {
+      controller?.dispose(); // Dispose only once
     }
   }
 }
