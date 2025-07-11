@@ -15,7 +15,6 @@ import '../../Model/getUserDataModel.dart';
 import '../Auth Screen/loginScreen.dart';
 import '../about_us.dart';
 import '../privecy_policy.dart';
-import '../scannerHistory.dart';
 import '../terms_and_contition.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -163,13 +162,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
 
                     Navigator.pop(context);
-                    if (currentIndex == 0) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => calssList[index],
-                          ));
-                    } else if (currentIndex == 1) {
+                    // if (currentIndex == 0) {
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => calssList[index],
+                    //       ));
+                    // } else
+                    if (currentIndex == 1) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -187,26 +187,28 @@ class _HomeScreenState extends State<HomeScreen> {
                           MaterialPageRoute(
                             builder: (context) => calssList[index],
                           ));
-                    } else if (currentIndex == 4) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => calssList[index],
-                          ));
-                    } else if (currentIndex == 5) {
+                    }
+                    // else if (currentIndex == 4) {
+                    //   Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //         builder: (context) => calssList[index],
+                    //       ));
+                    // }
+                    else if (currentIndex == 4) {
                       showDialog(
                           context: context,
                           barrierDismissible: false,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text("Delete Account"),
-                              content: Text(
-                                  "Are you sure you wan't to dlete this account"),
+                              title: const Text("Delete Account"),
+                              content: const Text(
+                                  "Are you sure you wan't to delete this account"),
                               actions: <Widget>[
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       primary: AppColors.primery),
-                                  child: Text("YES"),
+                                  child: const Text("YES"),
                                   onPressed: () async {
                                     deleteAccount();
                                   },
@@ -222,19 +224,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             );
                           });
-                    } else if (currentIndex == 6) {
+                    } else if (currentIndex == 5) {
                       showDialog(
                           context: context,
                           barrierDismissible: false,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text("Confirm Sign Out"),
-                              content: Text("Are you sure to sign out?"),
+                              title: const Text("Confirm Sign Out"),
+                              content: const Text("Are you sure to sign out?"),
                               actions: <Widget>[
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                       primary: AppColors.primery),
-                                  child: Text("YES"),
+                                  child: const Text("YES"),
                                   onPressed: () async {
                                     setState(() {
                                       sessonRemove();
@@ -498,7 +500,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List calssList = [
     HomeScreen(),
-    ScannerHistory(),
+    // ScannerHistory(),
     TerAndCondition(),
     AboutUs(),
     Privecy_Policy(),
@@ -510,11 +512,11 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'assets/images/Icon awesome-home.png',
       'image1': 'assets/images/home.png',
     },
-    {
-      'titlee': 'Scan History',
-      'image': 'assets/images/Scan History.png',
-      'image1': 'assets/images/Scan HistoryW.png',
-    },
+    // {
+    //   'titlee': 'Scan History',
+    //   'image': 'assets/images/Scan History.png',
+    //   'image1': 'assets/images/Scan HistoryW.png',
+    // },
     {
       'titlee': 'Terms & Conditions',
       'image': 'assets/images/Terms & Conditions.png',
@@ -795,10 +797,11 @@ class _ScanPayState extends State<ScanPay> {
           qrDataModel = QrDataModel.fromJson(decoded);
 
           Fluttertoast.showToast(msg: 'QR Successfully Scanned');
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const ScannerHistory()),
-          );
+          Navigator.pop(context);
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => const ScannerHistory()),
+          // );
         } else {
           Fluttertoast.showToast(msg: decoded['message']);
           Navigator.pop(context);
