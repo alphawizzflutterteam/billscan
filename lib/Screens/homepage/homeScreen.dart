@@ -645,6 +645,7 @@ class _ScanPayState extends State<ScanPay> {
   @override
   void initState() {
     super.initState();
+    print("for push check");
     getuserId();
     _onQRViewCreated;
   }
