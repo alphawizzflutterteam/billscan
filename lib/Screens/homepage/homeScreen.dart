@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+//import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Api Services/allApiEndPoint.dart';
@@ -68,14 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 content: Text("Are you sure you want to exit?"),
                 actions: <Widget>[
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: AppColors.primery),
+                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.primery),
                     child: Text("YES"),
                     onPressed: () {
                       SystemNavigator.pop();
                     },
                   ),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: AppColors.primery),
+                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.primery),
                     child: Text("NO"),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -207,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               actions: <Widget>[
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: AppColors.primery),
+                                      backgroundColor: AppColors.primery),
                                   child: const Text("YES"),
                                   onPressed: () async {
                                     deleteAccount();
@@ -215,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: AppColors.primery),
+                                      backgroundColor: AppColors.primery),
                                   child: Text("NO"),
                                   onPressed: () {
                                     Navigator.of(context).pop();
@@ -235,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               actions: <Widget>[
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: AppColors.primery),
+                                      backgroundColor: AppColors.primery),
                                   child: const Text("YES"),
                                   onPressed: () async {
                                     setState(() {
@@ -252,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: AppColors.primery),
+                                      backgroundColor: AppColors.primery),
                                   child: Text("NO"),
                                   onPressed: () {
                                     Navigator.of(context).pop();
