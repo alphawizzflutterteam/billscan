@@ -59,26 +59,31 @@ class _VerifieScreenState extends State<VerifieScreen> {
             const SizedBox(
               height: 50,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 40, right: 40),
-              child: OTPTextField(
-                controller: otpController,
-                length: 6,
-                width: MediaQuery.of(context).size.width,
-                fieldWidth: 50,
-                style: const TextStyle(color: AppColors.gray),
-                textFieldAlignment: MainAxisAlignment.spaceEvenly,
-                fieldStyle: FieldStyle.box,
-                onCompleted: (pin) {
-                  print("Completed: " + pin);
-
-                  setState(() {
-                    otpInput=pin;
-                    print(otpInput);
-                  });
-                },
-              ),
-            ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, right: 40),
+                  child: OTPTextField(
+                    controller: otpController,
+                    length: 6,
+                    width: MediaQuery.of(context).size.width,
+                    fieldWidth: 45, // Adjusted to prevent overflow
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey, // Use AppColors.gray if defined
+                    ),
+                    textFieldAlignment: MainAxisAlignment.spaceEvenly,
+                    fieldStyle: FieldStyle.box,
+                    onChanged: (pin) {
+                      // Optional: Handle input change
+                      print("Changed: $pin");
+                    },
+                    onCompleted: (pin) {
+                      print("Completed: $pin");
+                      setState(() {
+                        otpInput = pin;
+                      });
+                    },
+                  ),
+                ),
             const SizedBox(
               height: 50,
             ),

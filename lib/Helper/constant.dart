@@ -1,6 +1,6 @@
 class ConstScreen {
   static const String baseUrl = 'https://amitretail.in/app/v1/api/';
-  static const String appName = 'Scanner App';
+  static const String appName = 'ShubhLabh Connect';
 }
 
 int? venderId;
