@@ -35,11 +35,12 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 android {
     namespace "com.billscanner.main"
     compileSdkVersion 35
-    ndkVersion flutter.ndkVersion
+    ndkVersion "28.2.13676358"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
@@ -55,7 +56,7 @@ android {
         applicationId "com.billscanner.main"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion 22
+        minSdkVersion 23
         targetSdkVersion 35
         namespace "com.billscanner.main"
         versionCode flutterVersionCode.toInteger()
@@ -72,6 +73,7 @@ android {
     }
     buildTypes {
         release {
+
             signingConfig signingConfigs.release
         }
     }
@@ -83,5 +85,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4"
 
 }
